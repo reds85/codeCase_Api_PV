@@ -26,7 +26,7 @@ jobs:
             sleep 1
           done
       - name: Create_Database-from_script
-        run: mysql -h 127.0.0.1 -u root -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < bdddumps/script.sql
+        run: mysql -h 127.0.0.1 -u root -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < ./bdddumps/script.sql
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
