@@ -52,3 +52,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=reds85_codeCase_Api_PV
+      - name: Charging artefact #Permet de charger un artefact
+        uses: actions/upload-artifact@v4
+        with:
+            name: package.jar
+            path: target/*.jar
+            retention-days: 1
