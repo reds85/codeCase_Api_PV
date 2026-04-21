@@ -28,8 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
-		<sonar.projectKey>codecaseapi</sonar.projectKey>
-		<sonar.token>sqp_0be26ecb56c5ba4d6a88acae3082d24a04523f22</sonar.token>
 		<sonar.organization>reds85</sonar.organization>
 	</properties>
 	<dependencies>
