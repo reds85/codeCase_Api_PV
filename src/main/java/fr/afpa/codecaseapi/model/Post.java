@@ -31,7 +31,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "post")
+@Table(name = "Post")
 public class Post {
   /**
    * Variable id.

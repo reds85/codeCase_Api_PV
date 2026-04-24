@@ -7,6 +7,11 @@
 -- Version du serveur : 8.0.44
 -- Version de PHP : 8.3.30
 
+
+/*On créé la bdd si elle n'existe pas*/;
+CREATE DATABASE IF NOT EXISTS codecase;
+USE codecase;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -20,7 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `codecase`
 --
-
 -- --------------------------------------------------------
 
 --

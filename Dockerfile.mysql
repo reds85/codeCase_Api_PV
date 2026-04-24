@@ -1,0 +1,7 @@
+FROM mysql:8.0
+
+# On définit le nom de la base de données
+ENV MYSQL_DATABASE=codecase
+
+# On copie le script SQL dans le dossier d'initialisation de MySQL
+COPY bdddumps/script.sql /docker-entrypoint-initdb.d/
