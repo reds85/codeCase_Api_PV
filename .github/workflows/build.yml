@@ -98,6 +98,6 @@ jobs:
 
     Steps:
       -name: Déploiement
-        run: echo "Ici, on déploie l'image créée précédemment"
+      run: echo "Ici, on déploie l'image créée précédemment"
 
 
