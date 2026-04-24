@@ -8,9 +8,6 @@ on:
     branches:
       - main
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   Codecase-API-Test:
     name: Test Codecase API
@@ -68,6 +65,9 @@ jobs:
   #On va créer l'image de l'api Code Case avec un docker
   Creation-CodeCase-API-docker-image:
     name: Création de l'image docker de codecaseapi
+    run: |
+      mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
+                mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' ${{ secrets.DB_NAME }} < bdddumps/script.sql
     # Ce job ne va se lancer uniquement si les tests précédents réussissent
     needs: Codecase-API-Test
     runs-on: ubuntu-latest
