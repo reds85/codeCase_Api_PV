@@ -65,16 +65,21 @@ jobs:
   #On va créer l'image de l'api Code Case avec un docker
   Creation-CodeCase-API-docker-image:
     name: Création de l'image docker de codecaseapi
-    run: |
-      mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
-                mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' ${{ secrets.DB_NAME }} < bdddumps/script.sql
     # Ce job ne va se lancer uniquement si les tests précédents réussissent
     needs: Codecase-API-Test
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout du code
         uses: actions/checkout@v4
+
+      # Attention : Vous essayez de lancer des commandes MySQL ici.
+      # Ce job est un nouveau conteneur tout propre, il n'a pas accès au MySQL du Job précédent.
+      - name: Initialisation de la BDD (si nécessaire pour le build)
+        run: |
+          mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
+          mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' ${{ secrets.DB_NAME }} < bdddumps/script.sql
 
       - name: Connexion au Docker Hub
         uses: docker/login-action@v3
