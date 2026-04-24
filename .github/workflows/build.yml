@@ -96,8 +96,8 @@ jobs:
     needs: Creation-CodeCase-API-docker-image
     runs-on: ubuntu-latest
 
-    Steps:
-      -name: Déploiement
-      run: echo "Ici, on déploie l'image créée précédemment"
+    steps:
+      - name: Déploiement
+        run: echo "Ici, on déploie l'image créée précédemment"
 
 
