@@ -75,9 +75,6 @@ jobs:
           path: target/*.jar
           retention-days: 1
 
-      - name: MS Teams Incoming Webhook Notification
-        uses: mikesprague/teams-incoming-webhook-action@v2.0.3
-
   #On va créer l'image de l'api Code Case avec un docker
   Creation-CodeCase-API-docker-image:
     name: Création de l'image docker de codecaseapi
@@ -116,5 +113,3 @@ jobs:
     steps:
       - name: Déploiement
         run: echo "Ici, on déploie l'image créée précédemment"
-
-
