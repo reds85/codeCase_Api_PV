@@ -1,5 +1,5 @@
 # Etape 1 : Build (Construction du JAR
-FROM maven:3.99.6-eclipse-temurin-21-alpine AS build
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app
 
