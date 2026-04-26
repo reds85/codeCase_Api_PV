@@ -1,5 +1,5 @@
 # Etape 1 : Build (Construction du JAR
-FROM maven:3.99.9-eclopse-temurin-25-alpine AS build
+FROM maven:3.99.6-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN mvn clean package -DskipTests
 
 
 # Etape 2 : Exécution
-FROM eclipse-temurin:25-jdk
+FROM eclipse-temurin:21-jdk
 
 # Exposer le port 9002
 EXPOSE 9002
