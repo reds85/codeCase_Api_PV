@@ -21,6 +21,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
         ports:
           - 3306:3306
         options: >-
@@ -30,6 +31,17 @@ jobs:
           --health-retries=3
 
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Attente MySQL # on ajout -u root et le mot de passe pour éviter que la boucle ne tourne à l'inifi
+        run : |
+          while ! mysqladmin ping -h"127.0.0.1" -u root -p'${{ secrets.DB_PASSWORD }}' --silent; do
+            echo "En attente de MySQL..."
+            sleep 2
+          done
+
+      - name: Création BDD depuis script
+        run: mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' ${{ secrets.DB_NAME }} < bdddumps/script.sql
 
       - name: installation java
         uses: actions/setup-java@v5
@@ -77,13 +89,6 @@ jobs:
 
       - name: Checkout du code
         uses: actions/checkout@v4
-
-      # Attention : Vous essayez de lancer des commandes MySQL ici.
-      # Ce job est un nouveau conteneur tout propre, il n'a pas accès au MySQL du Job précédent.
-      - name: Initialisation de la BDD (si nécessaire pour le build)
-        run: |
-          mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
-          mysql -h 127.0.0.1 -u root -p'${{ secrets.DB_PASSWORD }}' ${{ secrets.DB_NAME }} < bdddumps/script.sql
 
       - name: Connexion au Docker Hub
         uses: docker/login-action@v3
