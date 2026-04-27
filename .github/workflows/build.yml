@@ -160,6 +160,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-          keep_files: true
+          PUBLISH_DIR: target/site/allure-maven-plugin
+          keep_files: false
