@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+  checks: write
+  contents: write # Requis pour publier Allure sur GitHub Pages si besoin
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
@@ -113,3 +118,41 @@ jobs:
     steps:
       - name: Déploiement
         run: echo "Ici, on déploie l'image créée précédemment"
+
+  # On génère le rapport ALLURE
+  Allure-Report:
+    name: Génération du rapport allure
+    needs: Deploiement-CodeCase-Api
+    runs-on: ubuntu-latest
+    if: always() # On veut le rapport même si les tests échouent
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report Action
+        uses: simple-elf/allure-report-action@v1.7
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_history: 20
+
+      - name: Déploiement du rapport sur github pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ALLURE_TOKEN }}
+          publish_dir: allure-history
