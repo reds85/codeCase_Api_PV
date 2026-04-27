@@ -97,7 +97,7 @@
 				<version>2.13.0</version>
 				<configuration>
 					<reportVersion>2.21.0</reportVersion>
-					<reportDirectory>${project.basedir}/allure-results</reportDirectory>
+					<reportDirectory>${project.build.directory}/allure-results</reportDirectory>
 				</configuration>
 				<executions>
 					<execution>
