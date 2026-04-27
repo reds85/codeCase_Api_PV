@@ -122,7 +122,7 @@ jobs:
   # On génère le rapport ALLURE
   Allure-Report:
     name: Génération du rapport allure
-    needs: Deploiement-CodeCase-Api
+    needs: Codecase-API-Test
     runs-on: ubuntu-latest
     if: always() # On veut le rapport même si les tests échouent
 
