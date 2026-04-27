@@ -11,17 +11,13 @@ RUN mvn clean package -DskipTests
 
 
 # Etape 2 : Exécution
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:25-jdk
 
 # Exposer le port 9002
 EXPOSE 9002
 
 # Répertoire de travail dans le conteneur pour stocker le jar
 WORKDIR /app
-
-
-# On récupère le JAR généré lors de l'étape précédente (AS build)
-COPY --from=build /app/target/*.jar /app/codecaseapi.jar
 
 # Commande pour exécuter le fichier jar
 ENTRYPOINT ["java", "-jar", "/app/codecaseapi.jar"]
