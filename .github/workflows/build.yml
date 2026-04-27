@@ -144,16 +144,16 @@ jobs:
           ref: gh-pages
           path: gh-pages-dir
 
-      - name: Allure Report Action
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-          keep_history: 20
+#      - name: Allure Report Action
+#        uses: simple-elf/allure-report-action@master
+#        if: always()
+#        id: allure-report
+#        with:
+#          allure_results: allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
+#          keep_history: 20
 
       - name: Déploiement du rapport sur github pages
         if: always()
@@ -161,4 +161,5 @@ jobs:
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/site/allure-maven-plugin
+          destination_dir: allure-report
           keep_files: false
