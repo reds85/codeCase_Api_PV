@@ -142,7 +142,7 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages
-          path: gh-pages
+          path: gh-pages-dir
 
       - name: Allure Report Action
         uses: simple-elf/allure-report-action@master
@@ -159,6 +159,7 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         env:
-          PERSONAL_TOKEN: ${{ secrets.ALLURE_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+          keep_files: true
