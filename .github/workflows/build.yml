@@ -80,6 +80,7 @@ jobs:
           github_token: ${{ secrets.ALLURE_TOKEN }}
           publish_dir: target/site/allure-maven-plugin
           destination_dir: allure-report
+          keep_files: false
 
       - name: Charging artefact #Permet de charger un artefact
         uses: actions/upload-artifact@v4
