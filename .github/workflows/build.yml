@@ -78,7 +78,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.ALLURE_TOKEN }}
-          publish_branch: main
           publish_dir: target/site/allure-maven-plugin
           destination_dir: allure-report
           keep_files: false

@@ -3,6 +3,7 @@ package fr.afpa.codecaseapi;
 import fr.afpa.codecaseapi.controller.PostController;
 import fr.afpa.codecaseapi.model.Post;
 import fr.afpa.codecaseapi.service.PostService;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +46,7 @@ public class PostControllerTests {
   private PostService postService;
 
   @Test
+  @Description("On teste si il retourne la liste de tous les cases")
   public void testGetPosts() throws Exception {
     // Arrange — on définit ce que le mock retourne
     Post post = new Post();
@@ -59,6 +61,7 @@ public class PostControllerTests {
   }
 
   @Test
+  @Description("On teste si il retourne le case dont l'identifiant est 1")
   public void testGetPostById() throws Exception {
     // Arrange
     Post post = new Post();
