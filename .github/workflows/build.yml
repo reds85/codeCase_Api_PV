@@ -74,11 +74,12 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=reds85_codeCase_Api_PV
 
       - name: Déploiement du rapport sur github pages
+        if: always()
         uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'reds/heads/main'
         with:
           github_token: ${{ secrets.ALLURE_TOKEN }}
-          publish_dir: ./public
+          publish_branch: main
+          publish_dir: target/site/allure-maven-plugin
           destination_dir: allure-report
           keep_files: false
 
