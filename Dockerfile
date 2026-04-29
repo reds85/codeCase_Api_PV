@@ -1,8 +1,8 @@
 # Etape 2 : Exécution
 FROM eclipse-temurin:25-jdk
 
-# Exposer le port 9001
-EXPOSE 9001
+# Exposer le port 9002
+EXPOSE 9002
 
 # Répertoire de travail dans le conteneur pour stocker le jar
 WORKDIR /app
