@@ -10,8 +10,7 @@ WORKDIR /app
 # Correction du chemin et du nom du fichier :
 # 1. On cherche dans 'target/' (où Maven dépose le jar)
 # 2. On utilise le nom correct 'codecasesite' vu dans vos logs
-# 3. On le renomme en 'app.jar' pour simplifier l'ENTRYPOINT
-COPY target/codecaseapi-0.0.1-SNAPSHOT.jar
+COPY target/codecaseapi-0.0.1-SNAPSHOT.jar /app/target/codecaseapi-0.0.1-SNAPSHOT.jar
 
 # Commande pour exécuter le fichier jar
 ENTRYPOINT ["java", "-jar", "codecaseapi-0.0.1-SNAPSHOT.jar"]
