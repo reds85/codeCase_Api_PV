@@ -71,16 +71,21 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=reds85_codeCase_Api_PV
-          mvn allure:report
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=reds85_codeCase_Api_PV
+
+      - name: Génération rapport Allure
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: target/allure-results
+          allure_report: allure-report
 
       - name: Déploiement du rapport sur github pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.ALLURE_TOKEN }}
-          publish_dir: target/site/allure-maven-plugin
+          publish_dir: allure-report
           destination_dir: allure-report
           keep_files: false
 
