@@ -108,6 +108,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: package.jar
+          path: target/
 
       - name: Connexion au Docker Hub
         uses: docker/login-action@v3
